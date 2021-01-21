@@ -20,12 +20,12 @@ public class GestionTituloREST {
 	@Path("IngresoTitulo")
 	@Consumes("application/json")
     @Produces("application/json")
-	public Mensaje deposito(Titulo titulo) throws Exception {
+	public Mensaje ingresoTitulo(Titulo titulo) throws Exception {
     	Mensaje m = new Mensaje();
 		try { 
 			gestionTituloON.crearTitulo(titulo);
 			m.setCode("ok");
-			m.setMessage("Retiro exitoso");
+			m.setMessage("ingreso exitoso");
 			return m;
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -42,7 +42,7 @@ public class GestionTituloREST {
 		try { 
 			gestionTituloON.crearPersona(estudiante);
 			m.setCode("ok");
-			m.setMessage("Retiro exitoso");
+			m.setMessage("ingreso exitoso");
 			return m;
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -53,13 +53,12 @@ public class GestionTituloREST {
 	@GET
 	@Path("listarTitulo")
 	@Consumes("application/json")
-   
-	public Mensaje litaTulo(String cedula) throws Exception {
+	public Mensaje litarTitulo(String cedula) throws Exception {
 		Mensaje m = new Mensaje();
 		try { 
 			gestionTituloON.listaTitulos(cedula);
 			m.setCode("ok");
-			m.setMessage("Retiro exitoso");
+			m.setMessage("listado exitoso");
 			return m;
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -68,7 +67,7 @@ public class GestionTituloREST {
 		} 
 	}
 	@GET
-	@Path("IngresoPerona")
+	@Path("buscar")
 	@Consumes("application/json")
    
 	public Mensaje Buscar(String cedula) throws Exception {

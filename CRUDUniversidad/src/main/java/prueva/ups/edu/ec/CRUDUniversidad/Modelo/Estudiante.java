@@ -20,7 +20,6 @@ public class Estudiante  implements Serializable{
 
 	@Id
 	private String Cedula;
-	
 	private String Nombre;
 	
 	@OneToMany()

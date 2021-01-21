@@ -109,7 +109,12 @@ public class vista extends JFrame {
 		JButton btnNewButton_1 = new JButton("Agregar Titulo");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				agregarTtulo();
+				try {
+					agregarTtulo();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_1.setBounds(139, 84, 89, 23);
@@ -140,15 +145,15 @@ public class vista extends JFrame {
 	 public void agregarPersona() {
 		 try {
 
-		        URL url = new URL("http://localhost:8080/CRUDUniversidad/ws/transacciones/IngresoPerona");
+		       URL url = new URL("http://localhost:8080/CRUDUniversidad/ws/transacciones/IngresoPerona");
 		        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		        conn.setDoOutput(true);
 		        conn.setRequestMethod("POST");
 		        conn.setRequestProperty("Content-Type", "application/json");
 
-		        String input = "{\"cedula\":"+textCedula.getText()+",\"nombre\":"+textNombre.getText()+"}";
+		        String input = "{\"cedula\":"+"\""+textCedula.getText()+"\",\"nombre\":"+"\""+textNombre.getText()+"\""+"}";
                 System.out.println(input);
-		        OutputStream os = conn.getOutputStream();
+		       OutputStream os = conn.getOutputStream();
 		        os.write(input.getBytes());
 		        os.flush();
 
@@ -168,7 +173,7 @@ public class vista extends JFrame {
 
 		        conn.disconnect();
 
-		      } catch (MalformedURLException e) {
+		     } catch (MalformedURLException e) {
 
 		        e.printStackTrace();
 
@@ -187,7 +192,7 @@ public class vista extends JFrame {
 		        conn.setRequestMethod("POST");
 		        conn.setRequestProperty("Content-Type", "application/json");
 
-		        String input = "{\"codigo\":"+aleatorios()+"\"NomTitulo\":"+textTitulo.getText()+",\"NomUniversidad\":"+textUniversida.getText()+",\"Fecha\":"+fechaActual()+",\"PK_EstudianteDT\":"+textCedula.getText()+"}";
+		        String input = "{\"codigo\":"+"\""+aleatorios()+"\""+",\"NomTitulo\":"+"\""+textTitulo.getText()+"\""+",\"NomUniversidad\":"+"\""+textUniversida.getText()+"\""+",\"Fecha\":"+"\""+fechaActual()+"\""+",\"PK_EstudianteDT\":"+"\""+textCedula.getText()+"\""+"}";
              System.out.println(input);
 		        OutputStream os = conn.getOutputStream();
 		        os.write(input.getBytes());
@@ -234,6 +239,9 @@ public class vista extends JFrame {
 			String fechaString = formato.format(date); 
 			Date miFecha = formato.parse(fechaString); 
 			return miFecha;
+		}
+		public void validarCedula(String cedula) {
+			
 		}
 	 public void buscar() {
 		 

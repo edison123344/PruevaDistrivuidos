@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -151,7 +152,7 @@ public class vista extends JFrame {
 		        conn.setRequestMethod("POST");
 		        conn.setRequestProperty("Content-Type", "application/json");
 
-		        String input = "{\"cedula\":"+"\""+textCedula.getText()+"\",\"nombre\":"+"\""+textNombre.getText()+"\""+"}";
+		        String input = "{\"cedula\":"+"\""+validarCedula(textCedula.getText())+"\",\"nombre\":"+"\""+textNombre.getText()+"\""+"}";
                 System.out.println(input);
 		       OutputStream os = conn.getOutputStream();
 		        os.write(input.getBytes());
@@ -192,7 +193,7 @@ public class vista extends JFrame {
 		        conn.setRequestMethod("POST");
 		        conn.setRequestProperty("Content-Type", "application/json");
 
-		        String input = "{\"codigo\":"+"\""+aleatorios()+"\""+",\"NomTitulo\":"+"\""+textTitulo.getText()+"\""+",\"NomUniversidad\":"+"\""+textUniversida.getText()+"\""+",\"Fecha\":"+"\""+fechaActual()+"\""+",\"PK_EstudianteDT\":"+"\""+textCedula.getText()+"\""+"}";
+		        String input = "{\"codigo\":"+"\""+aleatorios()+"\""+",\"NomTitulo\":"+"\""+textTitulo.getText()+"\""+",\"NomUniversidad\":"+"\""+textUniversida.getText()+"\""+",\"Fecha\":"+"\""+fechaActual()+"\""+",\"PK_EstudianteDT\":"+"\""+validarCedula(textCedula.getText())+"\""+"}";
              System.out.println(input);
 		        OutputStream os = conn.getOutputStream();
 		        os.write(input.getBytes());
@@ -240,8 +241,14 @@ public class vista extends JFrame {
 			Date miFecha = formato.parse(fechaString); 
 			return miFecha;
 		}
-		public void validarCedula(String cedula) {
-			
+		public String validarCedula(String cedula) {
+			if (cedula.length()==10) {
+				return cedula;
+				
+			}else {
+				JOptionPane.showMessageDialog(null, "Error cedula");
+				return null;
+			}
 		}
 	 public void buscar() {
 		 
